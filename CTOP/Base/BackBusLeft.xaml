@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="CTOP.Base.BackBusLeft"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="130">
+
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="TextAlignment" Value="Left"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Control.Template" Value="{StaticResource TransButton}"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="Transparent">
+        <Border Height="137" Width="130">
+            <!--Border背景填充，不得使用用户控件填充背景，文本元素会被遮住-->
+            <Border.Background>
+                <ImageBrush ImageSource="/CTOP;component/Picture/DLeft.png" />
+            </Border.Background>
+            
+            <Grid>
+                <Button Click="CPU_Click" Margin="20,30,0,30"
+                    >背板总线运行信息
+                </Button>
+            </Grid>
+            <!--<Grid>
+                <Button Click="CPU_Click" Margin="19,10,0,12"
+                    >背板总线运行信息
+                </Button>
+            </Grid>-->
+        </Border>
+    </Grid>
+
+</UserControl>

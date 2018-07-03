@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="CTOP.Base.DO15"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="50">
+    <UserControl.Resources>
+        <!--圆形按钮样式应用 设置样式后可直接使用，不需再指明模板名称-->
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Control.Template" Value="{StaticResource RedButton}"></Setter>
+            <Setter Property="Width" Value="12"></Setter>
+            <Setter Property="Height" Value="12"></Setter>
+            <Setter Property="Margin" Value="1"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="FontSize" Value="9"></Setter>
+        </Style>
+        <!--<Storyboard x:Key="LoadHeadStoryboard" >
+            <DoubleAnimationUsingKeyFrames 
+                BeginTime="0:0:0" 
+                Duration="0:0:1.2"
+                Storyboard.TargetName="DesignerHead"
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame   Value="1"/>
+                <SplineDoubleKeyFrame    Value="-1"/>
+                <SplineDoubleKeyFrame    Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+
+        </Storyboard>-->
+    </UserControl.Resources>
+    <!--<UserControl.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource LoadHeadStoryboard}"/>
+        </EventTrigger>
+    </UserControl.Triggers>-->
+
+    <!--<Border.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform ScaleX="1" ScaleY="0"></ScaleTransform>
+            </TransformGroup>
+        </Border.RenderTransform>-->
+    <!--Border背景填充，不得使用用户控件填充背景，文本元素会被遮住-->
+
+    <Grid 
+          MouseEnter="Border_MouseEnter"
+          MouseLeave="Border_MouseLeave" 
+          Height="400"
+          Width="50">
+        <Grid.Background>
+            <ImageBrush ImageSource="/CTOP;component/Picture/DO.png" />
+        </Grid.Background>
+        <!--3行1列布局-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="340"/>
+        </Grid.RowDefinitions>
+        <!--IO类型-->
+        <TextBlock Grid.Row="0"
+                       TextAlignment="Center" Foreground="White" 
+                       VerticalAlignment="Center"
+                       FontSize="13" Text="DO-15"
+                       Width="45"/>
+        <!--节点ID-->
+        <TextBlock Grid.Row="1" x:Name="NID" 
+                       VerticalAlignment="Center" FontSize="12"
+                       HorizontalAlignment="Center" TextAlignment="Center"
+                       Text="12" Foreground="White" 
+                       Width="47" Padding="2"
+                       Height="21" Background="Gray"/>
+        <!--各通道输出值-->
+        <StackPanel Grid.Row="2" x:Name="CHGroup" 
+                        Height="Auto"
+                        Button.Click="StackPanel_Click" 
+                        Margin="5,22,-1,-33"
+                    TouchDown="StackPanel_Click">
+            <Button Name="B1" Content="1"></Button>
+            <Button Name="B2" Content="2" ></Button>
+            <Button Name="B3" Content="3" ></Button>
+            <Button Name="B4" Content="4" ></Button>
+            <Button Name="B5" Content="5" ></Button>
+            <Button Name="B6" Content="6" ></Button>
+            <Button Name="B7" Content="7" ></Button>
+            <Button Name="B8" Content="8"  ></Button>
+            <Button Name="B9" Content="9"  ></Button>
+            <Button Name="B10" Content="10"  ></Button>
+            <Button Name="B11" Content="11"  ></Button>
+            <Button Name="B12" Content="12"  ></Button>
+            <Button Name="B13" Content="13"  ></Button>
+            <Button Name="B14" Content="14"  ></Button>
+            <Button Name="B15" Content="15"  ></Button>
+        </StackPanel>
+        <TextBlock Grid.Row="2"
+                   Width="Auto"
+                   TextAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Foreground="White"
+                   FontSize="10"
+                   Margin="0,0,0,50">Word值</TextBlock>
+        <TextBlock Name="HexValue" 
+                   Grid.Row="2"
+                   Width="Auto"
+                   TextAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,0,35">1111</TextBlock>
+        <Button Name="AllBtn"
+            Grid.Row="2"
+                Template="{StaticResource CZButtonSmall}"
+                Content="开/闭"
+                VerticalAlignment="Bottom"
+                Width="35"
+                Height="25"
+                Margin="0,0,0,5"
+                Click="ButtonAll_Click"
+                TouchDown="ButtonAll_Click"
+                FontSize="10"/>
+    </Grid>
+</UserControl>
+ 

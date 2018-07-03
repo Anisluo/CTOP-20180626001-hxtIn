@@ -1,0 +1,207 @@
+﻿<Window x:Class="CTOP.CTOPMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cm="clr-namespace:System.ComponentModel;assembly=System"
+        Height="571.5" Width="850.5"
+        MinHeight="450" MinWidth="790"
+        WindowStyle="None" AllowsTransparency="True"
+        MouseLeftButtonDown="DragWindow"
+        xmlns:local="clr-namespace:CTOP.UDP"
+        Title="CTOP Assistant">
+    
+    <!--异步线程-->
+    <Window.Resources>
+        <cm:BackgroundWorker x:Key="backgroundWorker"
+          DoWork="backgroundWorker_DoWork"
+          RunWorkerCompleted="backgroundWorker_RunWorkerCompleted">
+            
+        </cm:BackgroundWorker>
+    </Window.Resources>
+    
+    <Grid x:Name="Back">
+        <Grid.Background>
+            <SolidColorBrush Color="LightSkyBlue" Opacity="0.2"/>
+        </Grid.Background>
+        
+        <!--主界面2行布局-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <!--第1行，标题栏-->
+        <Grid Grid.Row="0"
+              Background="White">
+            <!--标题栏3列布局-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="230"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--跨列分割线-->
+            <Border Grid.ColumnSpan="3"
+                    Height="0.1" 
+                    Background="Black"
+                    VerticalAlignment="Bottom">
+            </Border>
+
+            <!--第1列Logo-->
+            <Image Grid.Column="0"
+                   Source="/CTOP;component/Picture/logo.png"
+                   VerticalAlignment="Center"
+                   Stretch="Uniform"
+                   HorizontalAlignment="Center"
+                   Margin="30,0,0,0">
+            </Image>
+            
+            <!--第1列Logo-->
+            <Image Grid.Column="0"
+                   Source="/CTOP;component/Picture/logo.ico"
+                   VerticalAlignment="Center"
+                   Stretch="Uniform"
+                   Height="25"
+                   HorizontalAlignment="Left"
+                   Margin="10,0,0,0">
+            </Image>
+            
+            <!--第2列软件名称及版本-->
+            <TextBlock Grid.Column="1"
+                       FontSize="12"
+                       Text="工程助手V2.1.4"
+                       Foreground="#0140A2"
+                       HorizontalAlignment="Left"
+                       Margin="0,0,0,0"
+                       VerticalAlignment="Center">
+            </TextBlock>
+
+            <!--第3列功能按钮-->
+            <WrapPanel Grid.Column="2"
+                       Button.Click="UI_Click"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center">
+                <Label x:Name="SwtichState"
+                       Width="60"
+                       Foreground="#676A6C"
+                       VerticalContentAlignment="Center"
+                       HorizontalContentAlignment="Center">
+                    点击启动
+                </Label>
+                <CheckBox Margin="0,0,15,0"
+                          Style="{DynamicResource SliderCheckBox}"
+                          Checked="Switch_IsOn_Checked"
+                          Unchecked="Switch_IsOn_Unchecked"
+                          IsChecked="False"
+                          x:Name="Switch_IsOn"
+                          Width="60"
+                          Foreground="#676A6C"/>
+                <Button x:Name="Help"
+                        Content="&#xf05a;"
+                        Template="{DynamicResource BigIcoButton}"
+                        ToolTip="使用提示">
+                </Button>
+                <Button x:Name="WeChat"
+                        Content="&#xf1d7;"
+                        Template="{DynamicResource BigIcoButton}"
+                        ToolTip="辰竹微信">
+                </Button>
+                <Button x:Name="Web"
+                        Content="&#xf015;"
+                        Template="{DynamicResource BigIcoButton}"
+                        ToolTip="辰竹官网">
+                </Button>
+                <Button x:Name="Cus"
+                        Content="&#xf025;"
+                        Template="{DynamicResource BigIcoButton}" 
+                        ToolTip="辰竹客服">
+                </Button>
+                <Border Width="1" 
+                        Background="#676A6C"
+                        Height="15"
+                        Margin="10,0,10,0">
+                </Border>
+                <Button Name="Min"
+                        Content="&#xf068;"
+                        Template="{DynamicResource BigIcoButton}"
+                        ToolTip="最小化" >
+                </Button>
+                <Button Name="Max"
+                        Content="&#xf096;"
+                        Template="{DynamicResource BigIcoButton}"
+                        ToolTip="最大化" >
+                </Button>
+                <Button Name="UIClose" 
+                        Margin="0,0,8,0"
+                        Content="&#xf00d;"
+                        Template="{DynamicResource BigIcoButton}"
+                        ToolTip="关闭">
+                </Button>
+            </WrapPanel>
+
+        </Grid>
+
+        <!--第二行，UI视图层-->
+        <Grid Grid.Row="1">
+            <!--两列展示-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <!--第1列 Tab框，不填item内容
+            提高界面切换效率及通讯控制-->
+            <TabControl Grid.Column="0"
+                        TabStripPlacement="Left"
+                        Style="{StaticResource TabControlStyle}"
+                        SelectionChanged="TabControl_SelectionChanged"
+                        x:Name="MyTab">
+                <TabItem Style="{StaticResource listTabItemStyle}" 
+                         Header="模型视图"
+                         Tag="&#xe900;">
+                </TabItem>
+                <TabItem Style="{StaticResource listTabItemStyle}" 
+                         Header="DO列表"
+                         Tag="&#xe901;">
+                </TabItem>
+                <TabItem 
+                    Style="{StaticResource listTabItemStyle}" 
+                    Header="DI列表"
+                    Tag="&#xe902;">
+                </TabItem>
+                <TabItem Style="{StaticResource listTabItemStyle}" 
+                         Header="AO列表"
+                         Tag="&#xe907;">
+                </TabItem>
+                <TabItem Style="{StaticResource listTabItemStyle}" 
+                         Header="AI列表"
+                         Tag="&#xe908;">
+                </TabItem>
+                <TabItem Style="{StaticResource listTabItemStyle}" 
+                         Header="M区列表"
+                         Tag="&#xe909;">
+                </TabItem>
+            </TabControl>
+
+            <!--第2列 content容器载体，存放视图内容
+            如果在tabitem里面，每次切换选项卡都会生成实例，速度较慢-->
+            <ContentControl Grid.Column="1" 
+                            x:Name="View">
+                <local:UdpControlBase></local:UdpControlBase>
+            </ContentControl>
+
+            <!--第2列 公司copyright-->
+            <TextBlock Grid.Column="1" 
+                       Margin="40,0,0,15"
+                       VerticalAlignment="Bottom"
+                       Foreground="#A0A1A3">
+                Copyright © 2018 上海辰竹仪表有限公司 All Rights Reserved
+            </TextBlock>
+
+            <ContentControl Name="test" HorizontalAlignment="Right"
+                Grid.Column="1" 
+                       Width="0">12
+            </ContentControl>
+        </Grid>
+    </Grid>
+
+</Window>

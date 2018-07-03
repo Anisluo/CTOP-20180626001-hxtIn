@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="CTOP.Overview.AI8COverview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CTOP.Overview"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="250">
+    <Grid Width="250" Background="Gray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <!--模块名称-->
+        <TextBlock Grid.Row="0">AI8C模块信息概略</TextBlock>
+        <!--模块信息-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0"
+                       TextAlignment="Center">输入量程</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="0"
+                       TextAlignment="Center">对应码值</TextBlock>
+            <TextBlock Grid.Column="2" Grid.Row="0"
+                       TextAlignment="Center">当前配置量程</TextBlock>
+
+            <TextBlock Grid.Column="0" Grid.Row="1"
+                       TextAlignment="Center">0~20mA</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="1"
+                       TextAlignment="Center">0~64000</TextBlock>
+
+            <TextBlock Grid.Column="0" Grid.Row="2"
+                       TextAlignment="Center">-20mA~20mA</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="2"
+                       TextAlignment="Center">-32000~32000</TextBlock>
+
+        </Grid>
+    </Grid>
+</UserControl>

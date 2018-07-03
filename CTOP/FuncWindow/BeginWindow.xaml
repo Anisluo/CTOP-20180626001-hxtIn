@@ -1,0 +1,202 @@
+﻿<Window x:Class="CTOP.FuncWindow.BeginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cm="clr-namespace:System.ComponentModel;assembly=System"
+        Height="130" Width="280"
+        WindowStyle="None" AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        MouseLeftButtonDown="DragWindow">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="20"></Setter>
+            <Setter Property="Width" Value="100"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="Padding" Value="0,0.5,0,0"></Setter>
+            <Setter Property="BorderBrush" Value="#0140A2"></Setter>
+            <!--<Setter Property="BorderThickness" Value="2"></Setter>-->
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Height" Value="20"></Setter>
+            <Setter Property="Width" Value="100"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="Padding" Value="0,1,0,0"></Setter>
+            <Setter Property="TextAlignment" Value="Right"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Control.Template" Value="{StaticResource CZButton}"/>
+        </Style>
+
+        <!--异步线程-->
+        <cm:BackgroundWorker x:Key="backgroundWorker"
+          DoWork="backgroundWorker_DoWork"
+          RunWorkerCompleted="backgroundWorker_RunWorkerCompleted">
+
+        </cm:BackgroundWorker>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <!--标题栏-->
+        <Grid Grid.Row="0" Background="#0140A2">
+            <TextBlock Style="{x:Null}"
+                       Foreground="White"
+                       Padding="0,5,0,0"
+                       Margin="5,0,0,0"
+                       Text="启动通讯"/>
+            <Button Click="SetButton_Click"
+                    Template="{StaticResource MidIcoButton}"
+                    HorizontalAlignment="Right"
+                    Content="&#xf013;" 
+                    ToolTip="高级设置"
+                    Margin="25,4"/>
+            <Button Click="Button_Click"
+                    Name="Close"
+                    Template="{StaticResource MidIcoButton}"
+                    HorizontalAlignment="Right"
+                    Content="&#xf00d;" 
+                    ToolTip="关闭"
+                    Margin="0,4,5,4"/>
+        </Grid>
+
+        <!--内容栏 3行2列-->
+        <Grid Grid.Row="1" Background="White" Margin="0,10,0,0"
+              Name="MainContent">
+            <!--列-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!--3行 隐藏内容必须用比列确定高度-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+
+            <!--第1行 IP地址-->
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="控制器IP地址：" 
+                   />
+            <TextBox Grid.Row="0"
+                     Grid.Column="1" 
+                     Name="PLC_IP"/>
+
+            <!--第2行 隐藏内容 4行2列-->
+            <Grid Name="SetContent"
+                  Grid.Row="1"
+                  Grid.ColumnSpan="2"
+                  Visibility="Collapsed">
+                <!--列-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <!--行-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="端口号：" />
+                <Label Grid.Row="0" Grid.Column="1"
+                       Content="502" Width="100"
+                       Height="25">
+                </Label>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="通讯间隔[MS]："/>
+                <ComboBox Grid.Row="1"  Grid.Column="1"
+                            Name="DelayT" 
+                            SelectedIndex="2"
+                            Width="100"
+                            Height="22">
+                    <ComboBoxItem >10</ComboBoxItem>
+                    <ComboBoxItem>50</ComboBoxItem>
+                    <ComboBoxItem>100</ComboBoxItem>
+                    <ComboBoxItem>400</ComboBoxItem>
+                </ComboBox>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="读超时[MS]："/>
+                <ComboBox Grid.Row="2"  Grid.Column="1"
+                            Name="RedOffMS" 
+                            SelectedIndex="2"
+                            Width="100"
+                            Height="22">
+                    <ComboBoxItem >500</ComboBoxItem>
+                    <ComboBoxItem>1000</ComboBoxItem>
+                    <ComboBoxItem>2000</ComboBoxItem>
+                </ComboBox>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="写超时[MS]："/>
+                <ComboBox Grid.Row="3"  Grid.Column="1"
+                            Name="WriteOffMS" 
+                            SelectedIndex="2"
+                            Width="100"
+                            Height="22">
+                    <ComboBoxItem >500</ComboBoxItem>
+                    <ComboBoxItem>1000</ComboBoxItem>
+                    <ComboBoxItem>2000</ComboBoxItem>
+                </ComboBox>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="重试间隔[MS]："/>
+                <ComboBox Grid.Row="4"  Grid.Column="1"
+                          Name="WaitToRetryMS"
+                       Height="22" Width="100"   SelectedIndex="1">
+                    <ComboBoxItem>500</ComboBoxItem>
+                    <ComboBoxItem>1000</ComboBoxItem>
+                    <ComboBoxItem>2000</ComboBoxItem>
+                </ComboBox>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="超时重试次数："/>
+                <ComboBox Name="Retry"
+                    Grid.Row="5" Grid.Column="1"
+                       Height="22" Width="100"   SelectedIndex="1">
+                    <ComboBoxItem>2</ComboBoxItem>
+                    <ComboBoxItem>3</ComboBoxItem>
+                    <ComboBoxItem>4</ComboBoxItem>
+                </ComboBox>
+            </Grid>
+
+            <!--第3行 按钮-->
+            <Button Grid.Row="2" Grid.Column="0"
+                    Name="ConnectBtn"
+                    Click="Button_Click"
+                    Height="30" Width="45"
+                    Content="连接"
+                    />
+            <Button Grid.Row="2" Grid.Column="1"
+                    Name="Cancel"
+                    Click="Button_Click"
+                    Height="30" Width="45" 
+                    Content="取消"/>
+            <TextBlock 
+                Name="MyTitle"
+                Visibility="Collapsed"
+                TextAlignment="Center"
+                Padding="3"
+                Grid.Row="3" Grid.ColumnSpan="2"
+                Height="20"
+                Style="{x:Null}"
+                Foreground="White"
+                Width="255">
+                <TextBlock.Background>
+                    <SolidColorBrush Color="#0140A2" Opacity="0.6"/>
+                </TextBlock.Background>
+            </TextBlock>
+
+        </Grid>
+    </Grid>
+
+</Window>

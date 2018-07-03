@@ -1,0 +1,93 @@
+﻿<Window x:Class="CTOP.CPUSub.RTUWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="" Height="180" Width="330"
+        WindowStyle="None" AllowsTransparency="True"
+        MouseLeftButtonDown="DragWindow" 
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="TextBlock" x:Key="ReadOnce">
+            <Setter Property="FontSize" Value="12"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <!--<Setter Property="Background" Value="Black"></Setter>-->
+            <Setter Property="Width" Value="55"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Margin" Value="10,0,0,0"></Setter>
+            <!--<Setter Property="HorizontalAlignment" Value="Center"></Setter>-->
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#0140A2"  
+                TextBlock.Foreground="White">
+            <Button 
+                Click="Close"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Content="&#xf00d;"
+                Template="{DynamicResource MidIcoButton}" 
+                ToolTip="关闭"
+                Margin="2,0">
+            </Button>
+            <TextBlock
+                    TextAlignment="Left"
+                    Padding="5"
+                Width="100"
+                HorizontalAlignment="Left"
+                >RTU信息</TextBlock>
+        </Grid>
+        <StackPanel Grid.Row="1" Margin="0,10,0,0">
+            <WrapPanel>
+                <TextBlock Style="{StaticResource ReadOnce}">信息来源：</TextBlock>
+                <TextBlock Style="{StaticResource ReadOnce}" Name="Device1"></TextBlock>
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock Style="{StaticResource ReadOnce}">从站地址：</TextBlock>
+                <TextBlock Style="{StaticResource ReadOnce}" Name="Device2"></TextBlock>
+            </WrapPanel>
+        </StackPanel>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <WrapPanel Grid.Row="0">
+                <TextBlock Style="{StaticResource ReadOnce}">通讯类别</TextBlock>
+                <TextBlock Style="{StaticResource ReadOnce}">波特率</TextBlock>
+                <TextBlock Style="{StaticResource ReadOnce}">校验位</TextBlock>
+                <TextBlock Style="{StaticResource ReadOnce}">数据位</TextBlock>
+                <TextBlock Style="{StaticResource ReadOnce}">停止位</TextBlock>
+            </WrapPanel>
+
+            <WrapPanel Grid.Row="1">
+                <TextBlock Style="{StaticResource ReadOnce}">RS232</TextBlock>
+                <TextBlock Style="{StaticResource ReadOnce}" Name="Device3"></TextBlock>
+                <TextBlock Style="{StaticResource ReadOnce}" Name="Device4"></TextBlock>
+                <TextBlock Style="{StaticResource ReadOnce}" Name="Device5"></TextBlock>
+                <TextBlock Style="{StaticResource ReadOnce}" Name="Device6"></TextBlock>
+            </WrapPanel>
+
+            <WrapPanel Grid.Row="2">
+                <TextBlock Style="{StaticResource ReadOnce}">RS485</TextBlock>
+                <TextBlock Style="{StaticResource ReadOnce}" Name="Device7"></TextBlock>
+                <TextBlock Style="{StaticResource ReadOnce}" Name="Device8"></TextBlock>
+                <TextBlock Style="{StaticResource ReadOnce}" Name="Device9"></TextBlock>
+                <TextBlock Style="{StaticResource ReadOnce}" Name="Device10"></TextBlock>
+            </WrapPanel>
+        </Grid>
+
+
+    </Grid>
+</Window>

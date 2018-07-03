@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="CTOP.Base.BackBusRight"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="130">
+
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="TextAlignment" Value="Left"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        </Style>
+
+        <!-- 设置模板的自定义内容：外观和行为 -->
+        <ControlTemplate x:Key="TransButton" TargetType="{x:Type Button}">
+            <Border Name="Border" 
+                    BorderThickness="2" CornerRadius="2"
+                    TextBlock.Foreground="Transparent"
+                    BorderBrush="Transparent">
+                <TextBlock Name="Txt" Text="{TemplateBinding Content}"
+                           TextAlignment="Center" VerticalAlignment="Center"
+                           TextWrapping="Wrap">
+                </TextBlock>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Txt" Property="Foreground" Value="White" />
+                    <Setter TargetName="Border" Property="Background" Value="#0140A2" />
+                    <Setter TargetName="Border" Property="BorderBrush" Value="White" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background" Value="Gray" />
+                    <Setter TargetName="Border" Property="BorderBrush" Value="Pink" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+
+        </ControlTemplate>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Control.Template" Value="{StaticResource TransButton}"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="Transparent">
+        <Border Height="137" Width="130">
+            <!--Border背景填充，不得使用用户控件填充背景，文本元素会被遮住-->
+            <Border.Background>
+                <ImageBrush ImageSource="/CTOP;component/Picture/Dright.png" />
+            </Border.Background>
+        </Border>
+    </Grid>
+
+</UserControl>

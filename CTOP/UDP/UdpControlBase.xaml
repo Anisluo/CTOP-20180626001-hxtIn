@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="CTOP.UDP.UdpControlBase"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CTOP.UDP"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="1150">
+
+    <StackPanel>
+        
+        <Button Margin="20" Height="40" Width="60" Click="BtnClkFindDevice" Name="BtnFindDevice">搜索</Button>
+        <DataGrid x:Name="table" CellEditEnding="table_CellEditEnding" BeginningEdit="table_BeginningEdit">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="CTOP控制器标识" 
+                                    IsReadOnly="True" 
+                                    Binding="{Binding MName}" 
+                                    Width="120">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="用户自定义字符串" 
+                                    IsReadOnly="False" 
+                                    Binding="{Binding UName}" 
+                                    Width="130">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="产品序列号" 
+                                    IsReadOnly="True" 
+                                    Binding="{Binding SNum}" 
+                                    Width="100">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="硬件版本" 
+                                    IsReadOnly="True" 
+                                    Binding="{Binding HWVer}" 
+                                    Width="100">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="固件版本" 
+                                    IsReadOnly="True" 
+                                    Binding="{Binding FMVer}" 
+                                    Width="100">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="MAC地址" 
+                                    IsReadOnly="True" 
+                                    Binding="{Binding MAC}" 
+                                    Width="100">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="控制器IP" 
+                                    IsReadOnly="False" 
+                                    Binding="{Binding LIP}" 
+                                    Width="100">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="远程IP" 
+                                    IsReadOnly="False" 
+                                    Binding="{Binding RIP}" 
+                                    Width="100">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="子网掩码" 
+                                    IsReadOnly="False" 
+                                    Binding="{Binding NetM}" 
+                                    Width="100">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="网关" 
+                                    IsReadOnly="False" 
+                                    Binding="{Binding GateW}" 
+                                    Width="80">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="密码" 
+                                    IsReadOnly="False" 
+                                    Binding="{Binding Key}" 
+                                    Width="100">
+                </DataGridTextColumn>
+
+                <DataGridTemplateColumn Header="值" MinWidth="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button 
+                                    Content="保存更改"
+                                    Click="SaveBtn_Click"
+                                    TouchDown="SaveBtn_Touch" 
+                                    Tag="{Binding Index}">
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</UserControl>
+<!--Content="保存更改"-->

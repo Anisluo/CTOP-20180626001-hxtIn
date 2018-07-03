@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="CTOP.Base.AO_4"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" Width="50">
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Height" Value="15"/>
+            <Setter Property="Padding" Value="0,1,0,0"/>
+            <Setter Property="Width" Value="28"/>
+            <!--<Setter Property="BorderThickness" Value="1"/>-->
+            <!--<Setter Property="BorderBrush" Value="#0140A2"/>-->
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="8"/>
+            <!--<Setter Property="IsEnabled" Value="False"/>-->
+            <!--<Setter Property="Background" Value="Black"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>-->
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Height" Value="10"/>
+            <Setter Property="Width" Value="28"/>
+            <Setter Property="FontSize" Value="8"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="Gray"/>
+        </Style>
+    </UserControl.Resources>
+
+
+    <Grid Height="400" Width="50"
+          MouseEnter="Border_MouseEnter"
+          MouseLeave="Border_MouseLeave">
+        <Grid.Background>
+            <ImageBrush ImageSource="/CTOP;component/Picture/DO.png"/>
+        </Grid.Background>
+        <!--3行1列布局-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="330"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <!--IO类型-->
+        <TextBlock Grid.Row="0"
+                       TextAlignment="Center" Foreground="White" 
+                       VerticalAlignment="Center"
+                       FontSize="13" Text="AO-4"
+                       Width="45" Style="{x:Null}"/>
+        <!--节点ID-->
+        <TextBlock Grid.Row="1" x:Name="NID"
+                   VerticalAlignment="Center" 
+                   FontSize="12"
+                   HorizontalAlignment="Center" 
+                   TextAlignment="Center"
+                       Text="12" Foreground="White" 
+                       Width="47" Padding="2"
+                       Height="21" Background="Gray"/>
+        <!--各通道输出值-->
+        <Canvas Grid.Row="0"
+                Margin="21,49,0,0" 
+                Name="CHGroup" 
+                KeyDown="KeyEnterDown" 
+                LostFocus="Text_LostFocus">
+            <TextBlock Text="CH1" Canvas.Top="35"/>
+            <TextBox Name="T1" Canvas.Top="45"/>
+
+            <TextBlock Text="CH2" Canvas.Top="63"/>
+            <TextBox Name="T2" Canvas.Top="73"/>
+
+            <TextBlock Text="CH3" Canvas.Top="91"/>
+            <TextBox Name="T3" Canvas.Top="101"/>
+
+            <TextBlock Text="CH4" Canvas.Top="119"/>
+            <TextBox Name="T4" Canvas.Top="129"/>
+        </Canvas>
+        <!--隐形控件，作为焦点存放容器
+            提高Enter的视觉效果-->
+        <TextBox Name="VText" Width="0" />
+    </Grid>
+
+</UserControl>

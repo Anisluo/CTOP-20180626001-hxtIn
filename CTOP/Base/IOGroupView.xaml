@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="CTOP.Base.IOGroupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="200"  d:DesignWidth="200">
+
+    <Grid Background="Transparent"
+          MouseWheel="IOGroup_MouseWheel"
+          MouseMove="IOGroup_MouseMove"
+          MouseRightButtonDown="IOGroup_MouseRightButtonDown"
+          MouseRightButtonUp="IOGroup_MouseRightButtonUp"
+          IsManipulationEnabled="True"
+          ManipulationStarting="IOGroup_ManipulationStarting"
+          ManipulationDelta="IOGroup_ManipulationDelta"
+          Margin="0,0,0,20">
+        <!--标题栏-->
+        <WrapPanel Margin="40,20,0,0"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left">
+
+            <Image x:Name="Test" Width="8" Margin="0,0,5,0"
+                Source="/CTOP;component/Picture/traingle@3x.png"
+                   VerticalAlignment="Center">
+            </Image>
+            <Button x:Name="IOTitle"
+                    FontSize="16"
+                    Click="TextBlock_Click"
+                    TouchDown="IOTitle_TouchDown"
+                    Cursor="Hand"
+                    Template="{StaticResource TextButton}"
+                    ToolTip="还原视图"
+                    Content="模型视图"
+                    Width="70"
+                    >
+
+            </Button>
+        </WrapPanel>
+
+        <!--内容栏-->
+        <Grid Margin="40,60,40,20" Width="1000" Height="1000">
+        <!--Canvas.Left="0" Canvas.Top="0"-->
+        
+        <Canvas x:Name="IOCanvas"
+                Background="Transparent"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                IsManipulationEnabled="True"
+                Height="100" Width="100">
+            
+            <ScrollViewer x:Name="IOScroll"
+                        HorizontalScrollBarVisibility="Hidden"
+                        VerticalScrollBarVisibility="Hidden"
+                        VerticalAlignment="Top"
+                        Height="460"
+                        Width="Auto"
+                        Canvas.Left="0"
+                        Canvas.Top="0"
+                        IsManipulationEnabled="True"
+                        Background="Transparent"
+                        MouseWheel="IOGroup_MouseWheel">
+                <ScrollViewer.RenderTransform>
+                    <TransformGroup x:Name="transGrp">
+                        <ScaleTransform x:Name="sfr" ScaleX="0.9" ScaleY="0.9" CenterX="00" CenterY="00"/>
+                        <TranslateTransform x:Name="tlt" />
+                        <MatrixTransform x:Name="Matfr" />
+                    </TransformGroup>
+                </ScrollViewer.RenderTransform>
+                    <WrapPanel x:Name="IOGroup" 
+                            Background="Transparent"
+                            MouseMove="IOGroup_MouseMove"
+                            MouseRightButtonDown="IOGroup_MouseRightButtonDown"
+                            MouseRightButtonUp="IOGroup_MouseRightButtonUp"
+                            Canvas.Left="0"
+                            Height="Auto"
+                            Width="Auto" 
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Center"
+                            IsManipulationEnabled="True"
+                            MouseWheel="IOGroup_MouseWheel">
+                    </WrapPanel>
+            </ScrollViewer>
+        </Canvas>
+        </Grid>
+
+    </Grid>
+</UserControl>
+
